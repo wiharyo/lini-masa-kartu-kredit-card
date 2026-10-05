@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sejarah Kartu Kredit — Carousel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=Poppins:wght@400;500;600;700&display=swap">
+<style>
+:root{--page:#f3f1ee;--ptext:#2a2724;--cream:#eeece8;--brick:#b4401f;--gold:#8f7219;--goldtxt:#7a6010;--ink:#26221d;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#14130f;--ptext:#e8e4dc}}
+:root[data-theme="dark"]{--page:#14130f;--ptext:#e8e4dc}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--page);color:var(--ptext);font-family:Poppins,system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;padding:16px 0}
+.wrap{width:min(100%,480px);position:relative}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.s{flex:0 0 100%;scroll-snap-align:start;aspect-ratio:4/5;position:relative;overflow:hidden;container-type:inline-size;background:var(--cream);
+background-image:radial-gradient(circle at 20% 10%,#f6f4f1 0,transparent 55%),radial-gradient(circle at 90% 95%,#e3e0da 0,transparent 50%);
+padding:7cqw;display:flex;flex-direction:column;color:var(--ink)}
+.s h2{font-weight:700;color:var(--brick);font-size:7cqw;line-height:1.18;letter-spacing:-.01em}
+.s p{font-size:3.9cqw;line-height:1.42;color:var(--goldtxt)}
+.s p b{color:var(--gold);font-weight:700}
+.brand{position:absolute;right:6cqw;bottom:5cqw;font-weight:700;font-size:3.4cqw;letter-spacing:-.02em;color:var(--gold);opacity:.55}
+.src{position:absolute;right:2cqw;top:50%;writing-mode:vertical-rl;font-size:2.2cqw;color:var(--gold);opacity:.6}
+.pill{position:absolute;top:4.5cqw;right:4.5cqw;background:rgba(40,40,40,.7);color:#fff;font-size:3.2cqw;padding:1.2cqw 3.2cqw;border-radius:99px;font-weight:500}
+.swipe{position:absolute;left:7cqw;bottom:5cqw;width:9cqw;height:.7cqw;background:var(--gold);opacity:.7;border-radius:2px}
+/* cover */
+.cover .kicker{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:600;color:var(--gold);font-size:7.6cqw;line-height:1}
+.cover .tag{align-self:flex-start;margin-top:4cqw;background:var(--gold);color:#fff;font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:3.6cqw;padding:1cqw 3cqw;border-radius:1.2cqw}
+.cover hr{border:0;border-top:.5cqw solid var(--ink);width:42cqw;margin:5cqw 0}
+.cover h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:9cqw;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+.card{position:absolute;width:56cqw;aspect-ratio:1.586;border-radius:3.4cqw;box-shadow:2cqw 3cqw 5cqw rgba(0,0,0,.28);padding:4cqw;display:flex;flex-direction:column;justify-content:space-between;color:#fff;font-weight:700;font-size:3.6cqw;letter-spacing:.04em}
+.card .chip{width:9cqw;height:6.6cqw;border-radius:1.2cqw;background:linear-gradient(135deg,#e9d38a,#b8962e)}
+.card small{font-size:2.6cqw;font-weight:500;letter-spacing:.12em;opacity:.9}
+.plastic{background:linear-gradient(135deg,#c9502a,#7d2410 70%)}
+.board{background:linear-gradient(135deg,#d8bf8e,#b99a5f);color:#4b3a1c}
+.c1{right:-6cqw;bottom:8cqw;transform:rotate(-12deg)}
+.c2{right:-4cqw;bottom:10cqw;transform:rotate(-14deg);z-index:0;opacity:.55;filter:saturate(.7)}
+.c1b{right:-1cqw;bottom:2cqw;transform:rotate(6deg);z-index:1}
+/* split */
+.split{padding:0;flex-direction:row}
+.panel{flex:0 0 62%;background:var(--gold);background-image:linear-gradient(160deg,rgba(255,255,255,.12),transparent 40%,rgba(0,0,0,.1));padding:8cqw 6cqw;display:flex;flex-direction:column;justify-content:center;gap:4cqw;color:#fff}
+.panel p{color:#fff;font-size:3.7cqw}
+.panel p.big{font-weight:700;font-size:4.6cqw;line-height:1.3}
+.side{flex:1;position:relative;background:linear-gradient(180deg,#f1ede7,#e2d9c9)}
+.side .board{width:48cqw;right:-14cqw;top:22cqw;transform:rotate(-80deg)}
+/* stats */
+.stats{display:flex;gap:2.5cqw;margin-top:auto;margin-bottom:9cqw}
+.stat{flex:1;background:#fff;border-radius:2cqw;padding:3cqw 2.5cqw;box-shadow:0 .6cqw 0 rgba(0,0,0,.14)}
+.stat b{display:block;font-size:5.6cqw;color:var(--brick);line-height:1.1}
+.stat span{font-size:2.9cqw;color:var(--goldtxt);line-height:1.25;display:block;margin-top:1cqw}
+/* timeline */
+.tl{margin-top:5cqw;display:flex;flex-direction:column;gap:4.2cqw;position:relative;padding-left:9cqw}
+.tl:before{content:"";position:absolute;left:2.2cqw;top:1.5cqw;bottom:2cqw;border-left:.6cqw dashed var(--gold);opacity:.6}
+.tl div{position:relative}
+.tl div:before{content:"";position:absolute;left:-8.4cqw;top:1cqw;width:3.4cqw;height:3.4cqw;border-radius:50%;background:var(--brick);box-shadow:0 0 0 1cqw var(--cream)}
+.tl b{display:block;font-size:5cqw;color:var(--brick);line-height:1.1}
+.tl p{font-size:3.5cqw;margin-top:.6cqw}
+/* window cards */
+.win{background:#fff;border-radius:1.6cqw;box-shadow:.9cqw 1cqw 0 rgba(0,0,0,.18);padding:2.6cqw 4cqw 3.4cqw;margin-top:3.6cqw}
+.win i{display:flex;gap:1.1cqw;margin-bottom:1.6cqw}
+.win i:before,.win i:after,.win i span{content:"";width:1.4cqw;height:1.4cqw;border-radius:50%;background:#d93a2b;display:block}
+.win i span{background:#e9a62a}.win i:after{background:#4fb04a}
+.win p{font-size:3.4cqw;line-height:1.38}
+.close{margin-top:auto;margin-bottom:7cqw;text-align:center;font-size:3.5cqw !important;padding:0 2cqw}
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
+.dots{display:flex;gap:7px}
+.dots span{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.25;transition:opacity .2s}
+.dots span.on{opacity:.9}
+.nav button{font:inherit;background:none;border:1px solid currentColor;color:inherit;border-radius:99px;width:36px;height:36px;font-size:16px;cursor:pointer;opacity:.7}
+.nav button:focus-visible{outline:2px solid var(--brick);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="track" id="t">
+
+<section class="s cover">
+  <div class="kicker">Sejarah<br>hari ini.</div>
+  <div class="tag">Edisi Uang Hari Ini</div>
+  <hr>
+  <h1>Kartu Kredit Ternyata Lahir dari Dompet yang Ketinggalan!</h1>
+  <div class="card plastic c1"><div class="chip"></div><div>KARTU KREDIT<br><small>BAYAR NANTI, BELI SEKARANG</small></div></div>
+  <div class="brand">NAMA BRAND</div>
+  <div class="swipe"></div>
+</section>
+
+<section class="s split">
+  <div class="pill">2/5</div>
+  <div class="panel">
+    <p>Tahun 1949, pengusaha New York bernama Frank McNamara lupa bawa dompet saat makan malam. Istrinya yang akhirnya membayar tagihan.</p>
+    <p>Nggak mau malu lagi, ia bikin kartu keanggotaan bareng Ralph Schneider supaya tagihan restoran bisa dilunasi sebulan sekali.</p>
+    <p class="big">Namanya Diners Club. Setahun kemudian, pemakainya sudah sekitar 42.000 orang.</p>
+  </div>
+  <div class="side"><div class="card board"><div class="chip" style="background:none"></div><div>DINERS CLUB<br><small>KARTU KARDUS · 1950</small></div></div></div>
+  <div class="brand" style="color:#fff">NAMA BRAND</div>
+</section>
+
+<section class="s">
+  <div class="pill">3/5</div>
+  <h2 style="margin-top:9cqw">Kirim 60.000 kartu tanpa riset? Hasilnya rugi besar.</h2>
+  <p style="margin-top:4.5cqw">September 1958, Bank of America mengirim <b>BankAmericard</b> ke warga Fresno tanpa diminta. Batas kreditnya ditentukan asal, dan semua nasabah dianggap pasti bayar tepat waktu.</p>
+  <p style="margin-top:3cqw">Ternyata nggak. Setahun pertama rugi jutaan dolar, manajernya mundur, dan kartu yang dikirim lewat pos gampang dicuri. Dari sini muncul penipuan kartu kredit.</p>
+  <div class="stats">
+    <div class="stat"><b>60.000</b><span>kartu dikirim ke Fresno</span></div>
+    <div class="stat"><b>$300–500</b><span>batas kredit, ditentukan tanpa riset</span></div>
+    <div class="stat"><b>Jutaan $</b><span>kerugian di tahun pertama</span></div>
+  </div>
+  <div class="src">Sumber: HistoryFacts.com</div>
+  <div class="brand">NAMA BRAND</div>
+</section>
+
+<section class="s">
+  <div class="pill">4/5</div>
+  <h2 style="margin-top:9cqw">Dari Kardus ke Plastik, Lalu Pita Magnetik</h2>
+  <div class="tl">
+    <div><b>1959</b><p>American Express jadi perusahaan besar pertama yang pakai kartu plastik, bukan kardus.</p></div>
+    <div><b>1969–1970</b><p>Teknologi pita magnetik dari IBM dipasang di kartu. Bisa menyimpan data dan bantu mendeteksi penipuan. Dirilis ke publik lewat kerja sama Amex, American Airlines, dan IBM.</p></div>
+    <div><b>1991</b><p>Amex meluncurkan Membership Miles, program poin pertama: tiap dolar yang dibelanjakan jadi poin perjalanan.</p></div>
+  </div>
+  <div class="brand">NAMA BRAND</div>
+</section>
+
+<section class="s">
+  <div class="pill">5/5</div>
+  <h2 style="margin-top:6cqw;font-size:6.2cqw">Sampai 1974, Perempuan Susah Punya Kartu Sendiri</h2>
+  <div class="win"><i><span></span></i><p><b>Menikah?</b> Kartu hanya keluar atas nama suami.</p></div>
+  <div class="win"><i><span></span></i><p><b>Lajang?</b> Harus ada penjamin laki-laki, bahkan kalau penghasilan sendiri cukup.</p></div>
+  <div class="win"><i><span></span></i><p><b>Titik balik.</b> Putusan Mahkamah Agung AS 1971 membuka jalan bagi UU 1974 yang melarang kredit ditolak karena gender, agama, atau ras.</p></div>
+  <p class="close"><b>Kartu di dompet kita ternyata punya sejarah panjang, dari lupa bawa dompet sampai perjuangan hak yang setara.</b></p>
+  <div class="brand">NAMA BRAND</div>
+</section>
+
+</div>
+<div class="nav">
+  <button id="p" aria-label="Sebelumnya">‹</button>
+  <div class="dots" id="d"><span class="on"></span><span></span><span></span><span></span><span></span></div>
+  <button id="n" aria-label="Berikutnya">›</button>
+</div>
+</div>
+<script>
+(function(){
+var t=document.getElementById('t'),ds=document.querySelectorAll('#d span');
+function i(){return Math.round(t.scrollLeft/t.clientWidth)}
+t.addEventListener('scroll',function(){var k=i();ds.forEach(function(s,j){s.classList.toggle('on',j===k)})});
+function go(k){t.scrollTo({left:Math.max(0,Math.min(4,k))*t.clientWidth,behavior:'smooth'})}
+document.getElementById('p').onclick=function(){go(i()-1)};
+document.getElementById('n').onclick=function(){go(i()+1)};
+})();
+</script>
+</body>
+</html>
